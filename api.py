@@ -108,7 +108,8 @@ def train():
                        ,shell=True)
     print(f"[*] Converted ckpt saved at {ckpt_path}")
     print(f"[*] WEIGHTS_DIR={WEIGHTS_DIR}")
-    print("Dreambooth Train Completed. It took %1.1f minutes." % (time.time()-time_start)/60)
+    minutes = (time.time()-time_start)/60
+    print("Dreambooth Train Completed. It took %1.1f minutes." %minutes)
 
     response = {'ckpt_path' : ckpt_path}
 
@@ -173,5 +174,5 @@ def test():
     return Response(response=json.dumps(response), status=200)
 
 if __name__=='__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000,debug=True)
     #test()

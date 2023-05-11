@@ -44,16 +44,15 @@ def train():
 
     # Get instance image from request
     images = request.files.getlist('images')
-
-    instance_image_dir = os.path.join(os.getcwd(), '/data/instance')
-    class_image_dir = os.path.join(os.getcwd(), '/data/class')
-    
-    os.makedirs(instance_image_dir,exist_ok=True)
+    instance_image_dir = os.getcwd() + '/data/instance'
+    class_image_dir = os.getcwd() +  '/data/class'
+    #os.makedirs(instance_image_dir,exist_ok=True)
     print(f"Uploading instance images for promt : `{instance_prompt}`")
     image_paths = []
     for i, image in enumerate(images):
         image_path = os.path.join(instance_image_dir, f'image_{i}.jpg')
-        image.save(image_path)
+        img = PIL.Image.open(image)
+        img.save(image_path)
         image_paths.append(image_path)
 
     concepts_list = [
@@ -162,7 +161,7 @@ def test():
     import json
     images = []
     for i in range (4):
-        img = PIL.Image.open('/home/list99/workspace_dactt/convert-Dreambooth_Stable_Diffusion/data/instance/1.png')
+        img = PIL.Image.open('/home/list99/workspace_dactt/Dreambooth_Stable_Diffusion-demo/data/instance/1.png')
         images.append(img)
     zip_data = 'images.zip'
     with zipfile.ZipFile(zip_data, mode='w') as zip_file:

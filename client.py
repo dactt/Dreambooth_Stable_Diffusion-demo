@@ -26,7 +26,12 @@ def test_inference():
                 'seed' : 1,
                 }
         response = requests.post(test_url, data = data)
-        print(response.text)
+        if response.status_code == 200:
+            with open('images_download.zip', 'wb') as file:
+                file.write(response.content)
+            print('File downloaded successfully')
+        else:
+            print('Falied to download')
 
 if __name__== "__main__":
         test_inference()

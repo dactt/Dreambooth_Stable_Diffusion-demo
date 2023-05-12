@@ -114,7 +114,7 @@ def train():
 
     response = {'ckpt_path' : ckpt_path}
 
-    return Response(response=response, status=200)
+    return Response(response=json.dumps(response), status=200)
     return ckpt_path
 
 @app.route('/inference', methods=['POST'])
@@ -122,14 +122,23 @@ def inference():
 
     prompt = request.form['prompt']
     negative_prompt = request.form['negative_prompt']
-    num_samples = request.form['num_samples']
-    guidance_scale = request.form['guidance_scale']
-    num_inference_steps = request.form['num_inference_steps']
-    height = request.form['height']
-    width = request.form['width']
-    seed = request.form['seed']
+    num_samples = int(request.form['num_samples'])
+    guidance_scale = float(request.form['guidance_scale'])
+    num_inference_steps = int(request.form['num_inference_steps'])
+    height = int(request.form['height'])
+    width = int(request.form['width'])
+    seed = int(request.form['seed']) 
 
-    model_path = ''
+    # prompt = "oil painting of zwx in style of dog, only face" #@param {type:"string"}
+    # negative_prompt = "" #@param {type:"string"}
+    # num_samples = 2 #@param {type:"number"}
+    # guidance_scale = 7.5 #@param {type:"number"}
+    # num_inference_steps = 30 #@param {type:"number"}
+    # height = 512 #@param {type:"number"}
+    # width = 512 #@param {type:"number"}
+    # seed = 1001 #@param {type:"number"}
+
+    model_path = '/workspace/Dreambooth_Stable_Diffusion-demo/Dreambooth_Stable_Diffusion-demostable_diffusion_weights/output/800'
     if 'pipe' not in locals():
         scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
         pipe = StableDiffusionPipeline.from_pretrained(model_path, scheduler=scheduler, safety_checker=None, torch_dtype=torch.float16).to("cuda")
@@ -176,4 +185,3 @@ def test():
 
 if __name__=='__main__':
     app.run(host="0.0.0.0", port=5000,debug=True)
-    #test()

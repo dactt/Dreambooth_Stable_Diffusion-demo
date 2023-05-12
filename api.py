@@ -46,7 +46,8 @@ def train():
     images = request.files.getlist('images')
     instance_image_dir = os.getcwd() + '/data/instance'
     class_image_dir = os.getcwd() +  '/data/class'
-    #os.makedirs(instance_image_dir,exist_ok=True)
+    os.makedirs(instance_image_dir,exist_ok=True)
+    os.makedirs(class_image_dir,exist_ok=True)
     print(f"Uploading instance images for promt : `{instance_prompt}`")
     image_paths = []
     for i, image in enumerate(images):

@@ -19,7 +19,7 @@ time_start = time.time()
 HUGGINGFACE_TOKEN = ""
 MODEL_NAME = "runwayml/stable-diffusion-v1-5"
 BRANCH = "fp16"
-OUTPUT_DIR = os.getcwd() + "stable_diffusion_weights/output"
+OUTPUT_DIR = os.getcwd() + "/stable_diffusion_weights/output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 print(f"[*] Weights will be saved at {OUTPUT_DIR}")
 

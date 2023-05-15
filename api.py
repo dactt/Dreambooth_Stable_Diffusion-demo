@@ -138,7 +138,7 @@ def inference():
     # width = 512 #@param {type:"number"}
     # seed = 1001 #@param {type:"number"}
 
-    model_path = '/workspace/Dreambooth_Stable_Diffusion-demo/Dreambooth_Stable_Diffusion-demostable_diffusion_weights/output/800'
+    model_path = '/workspace/Dreambooth_Stable_Diffusion-demo/stable_diffusion_weights/output/800'
     if 'pipe' not in locals():
         scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
         pipe = StableDiffusionPipeline.from_pretrained(model_path, scheduler=scheduler, safety_checker=None, torch_dtype=torch.float16).to("cuda")
